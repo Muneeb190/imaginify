@@ -1,23 +1,26 @@
-import { Collections } from "@/components/shared/collections"
-import { navLinks } from "@/constants"
-import { getAllImages } from "@/lib/actions/image.actions"
-import Image from "next/image"
-import Link from "next/link"
+import { Collections } from "@/components/shared/collections";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.actions";
+import Image from "next/image";
+import Link from "next/link";
 
+// ✅ Correct type for searchParams only
+type PageProps = {
+  searchParams?: {
+    [key: string]: string | string[] | undefined;
+  };
+};
 
-const Home = async (props: SearchParamProps) => {
-
-  const searchParams = await props.searchParams || {};
-
+const Home = async ({ searchParams }: PageProps) => {
   const page = Number(searchParams?.page) || 1;
   const searchQuery = (searchParams?.query as string) || '';
 
-  const images = await getAllImages({ page, searchQuery })
+  const images = await getAllImages({ page, searchQuery });
 
   return (
     <>
       <section className="home" style={{ backgroundImage: `url(${"/assets/images/banner-bg.png"})` }}>
-        <h1 className="home-heading">
+        <h1 className="home-heading mb-4">
           Unleash Your Creative Vision with Imaginify
         </h1>
         <ul className="flex-center w-full gap-20">
@@ -30,7 +33,9 @@ const Home = async (props: SearchParamProps) => {
               <li className="flex-center w-fit rounded-full bg-white p-4">
                 <Image src={link.icon} alt="image" width={24} height={24} />
               </li>
-              <p className="p-14-medium text-center text-white">{link.label}</p>
+              <p className="p-14-medium text-center text-white">
+                {link.label}
+              </p>
             </Link>
           ))}
         </ul>
@@ -45,7 +50,7 @@ const Home = async (props: SearchParamProps) => {
         />
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
