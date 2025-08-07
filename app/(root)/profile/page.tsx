@@ -6,22 +6,22 @@ import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-type PageProps = {
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
-};
+// type PageProps = {
+//   searchParams?: {
+//     [key: string]: string | string[] | undefined;
+//   };
+// };
 
 
-const Profile = async ({ searchParams }: PageProps) => {
-  const page = Number(searchParams?.page) || 1;
+const Profile = async () => {
+  // const page = Number(searchParams?.page) || 1;
 
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");
 
   const user = await getUserById(userId);
-  const images = await getUserImages({ page, userId: user._id });
+  // const images = await getUserImages({ page, userId: user._id });
 
   return (
     <>
@@ -52,17 +52,17 @@ const Profile = async ({ searchParams }: PageProps) => {
               height={50}
               className="size-9 md:size-12"
             />
-            <h2 className="h2-bold text-dark-600">{images?.data.length}</h2>
+            <h2 className="h2-bold text-dark-600">{}</h2>
           </div>
         </div>
       </section>
 
       <section className="mt-8 md:mt-14">
-        <Collections
+        {/* <Collections
           images={images?.data}
           totalPages={images?.totalPages}
           page={page}
-        />
+        /> */}
       </section>
     </>
   );
