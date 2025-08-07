@@ -7,6 +7,10 @@ import { transformationTypes } from "@/constants";
 import Header from "@/components/shared/header";
 import TransformationForm from "@/components/shared/transformationForm";
 
+type SearchParamProps = {
+  params: { id: string; type: TransformationTypeKey };
+};
+
 const Page = async ({ params: { id } }: SearchParamProps) => {
   const { userId } = await auth();
 
