@@ -1,22 +1,18 @@
-import { Collections } from "@/components/shared/collections";
-import { navLinks } from "@/constants";
-import { getAllImages } from "@/lib/actions/image.actions";
-import Image from "next/image";
-import Link from "next/link";
+import { Collections } from "@/components/shared/collections"
+import { navLinks } from "@/constants"
+import { getAllImages } from "@/lib/actions/image.actions"
+import Image from "next/image"
+import Link from "next/link"
 
-// ✅ Only define searchParams, and DO NOT await it
-type PageProps = {
-  searchParams?: {
-    [key: string]: string | string[] | undefined;
-  };
-};
 
-const Home = async ({ searchParams }: PageProps) => {
-  const params = searchParams || {};
-  const page = Number(params?.page) || 1;
-  const searchQuery = (params?.query as string) || '';
+const Home = async (props: SearchParamProps) => {
 
-  const images = await getAllImages({ page, searchQuery });
+  const searchParams = await props.searchParams || {};
+
+  const page = Number(searchParams?.page) || 1;
+  const searchQuery = (searchParams?.query as string) || '';
+
+  const images = await getAllImages({ page, searchQuery })
 
   return (
     <>
@@ -34,9 +30,7 @@ const Home = async ({ searchParams }: PageProps) => {
               <li className="flex-center w-fit rounded-full bg-white p-4">
                 <Image src={link.icon} alt="image" width={24} height={24} />
               </li>
-              <p className="p-14-medium text-center text-white">
-                {link.label}
-              </p>
+              <p className="p-14-medium text-center text-white">{link.label}</p>
             </Link>
           ))}
         </ul>
@@ -51,7 +45,7 @@ const Home = async ({ searchParams }: PageProps) => {
         />
       </section>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
