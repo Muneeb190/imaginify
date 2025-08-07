@@ -7,12 +7,14 @@ import { redirect } from 'next/navigation';
 
 interface SearchParamProps {
   params: {
-    type: string;
+    type: TransformationTypeKey;
   };
 }
 
 
-const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps) => {
+
+const AddTransformationTypePage = async ({ params }: SearchParamProps) => {
+  const { type } = await params;
   const { userId } = await auth();
 
   // Redirect if not authenticated

@@ -4,18 +4,17 @@ import { getAllImages } from "@/lib/actions/image.actions"
 import Image from "next/image"
 import Link from "next/link"
 
-// type PageProps = {
-//   searchParams?: {
-//     [key: string]: string | string[] | undefined;
-//   };
-// };
+declare type SearchParamProps = {
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
 
-const Home = async () => {
-  // const page = Number(searchParams?.page) || 1;
-  // const searchQuery = (searchParams?.query as string) || '';
+const Home = async (props: SearchParamProps) => {
+  const searchParams = await props.searchParams || {};
+  const page = Number(searchParams?.page) || 1;
+  const searchQuery = (searchParams?.query as string) || '';
 
-  // const images = await getAllImages({ page, searchQuery })
+  const images = await getAllImages({ page, searchQuery })
 
   return (
     <>
@@ -40,12 +39,12 @@ const Home = async () => {
       </section>
 
       <section className="sm:mt-12">
-        {/* <Collections
+        <Collections
           hasSearch={true}
           images={images?.data}
           totalPages={images?.totalPage}
           page={page}
-        /> */}
+        />
       </section>
     </>
   )

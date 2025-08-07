@@ -9,11 +9,14 @@ import { auth } from "@clerk/nextjs/server";
 import TransformedImage from "@/components/shared/transformedImage";
 import { DeleteConfirmation } from "@/components/shared/deleteConfirmations";
 
-type SearchParamProps = {
-  params: { id: string; type: TransformationTypeKey };
-};
+interface SearchParamProps {
+  params: {
+    id: string;
+  };
+}
 
-const ImageDetails = async ({ params: { id } }: SearchParamProps) => {
+const ImageDetails = async ({ params }: SearchParamProps) => {
+  const { id } = await params;
   const { userId } = await auth();
 
   const image = await getImageById(id);
