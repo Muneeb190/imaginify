@@ -13,7 +13,8 @@ type PageProps = {
 };
 
 const Profile = async ({ searchParams }: PageProps) => {
-  const page = Number(searchParams?.page) || 1;
+  const params = searchParams || {};
+  const page = Number(params?.page) || 1;
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");

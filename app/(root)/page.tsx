@@ -4,7 +4,7 @@ import { getAllImages } from "@/lib/actions/image.actions";
 import Image from "next/image";
 import Link from "next/link";
 
-// ✅ Correct type for searchParams only
+// ✅ Only define searchParams, and DO NOT await it
 type PageProps = {
   searchParams?: {
     [key: string]: string | string[] | undefined;
@@ -12,15 +12,16 @@ type PageProps = {
 };
 
 const Home = async ({ searchParams }: PageProps) => {
-  const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || '';
+  const params = searchParams || {};
+  const page = Number(params?.page) || 1;
+  const searchQuery = (params?.query as string) || '';
 
   const images = await getAllImages({ page, searchQuery });
 
   return (
     <>
       <section className="home" style={{ backgroundImage: `url(${"/assets/images/banner-bg.png"})` }}>
-        <h1 className="home-heading mb-4">
+        <h1 className="home-heading">
           Unleash Your Creative Vision with Imaginify
         </h1>
         <ul className="flex-center w-full gap-20">
