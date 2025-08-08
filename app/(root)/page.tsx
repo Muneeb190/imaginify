@@ -1,24 +1,26 @@
-import { Collections } from "@/components/shared/collections"
-import { navLinks } from "@/constants"
-import { getAllImages } from "@/lib/actions/image.actions"
-import Image from "next/image"
-import Link from "next/link"
+import { Collections } from "@/components/shared/collections";
+import { navLinks } from "@/constants";
+import { getAllImages } from "@/lib/actions/image.actions";
+import Image from "next/image";
+import Link from "next/link";
 
-declare type SearchProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
+type SearchProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
+const Home = async ({ searchParams }: SearchProps) => {
+  const resolvedParams = await searchParams;
+  const page = Number(resolvedParams?.page) || 1;
+  const searchQuery = (resolvedParams?.query as string) || '';
 
-const Home = async (props: SearchProps) => {
-  const searchParams = await props.searchParams || {};
-  const page = Number(searchParams?.page) || 1;
-  const searchQuery = (searchParams?.query as string) || '';
-
-  const images = await getAllImages({ page, searchQuery })
+  const images = await getAllImages({ page, searchQuery });
 
   return (
     <>
-      <section className="home" style={{ backgroundImage: `url(${"/assets/images/banner-bg.png"})` }}>
+      <section
+        className="home"
+        style={{ backgroundImage: `url(/assets/images/banner-bg.png)` }}
+      >
         <h1 className="home-heading">
           Unleash Your Creative Vision with Imaginify
         </h1>
@@ -47,7 +49,7 @@ const Home = async (props: SearchProps) => {
         />
       </section>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
