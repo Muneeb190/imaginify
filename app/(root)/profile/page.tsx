@@ -10,7 +10,6 @@ type SearchProps = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-
 const Profile = async ({ searchParams }: SearchProps) => {
   const resolvedParams = await searchParams;
   const page = Number(resolvedParams?.page) || 1;

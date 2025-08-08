@@ -10,13 +10,11 @@ import TransformedImage from "@/components/shared/transformedImage";
 import { DeleteConfirmation } from "@/components/shared/deleteConfirmations";
 
 interface SearchParamProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>; // ✅ FIXED
 }
 
 const ImageDetails = async ({ params }: SearchParamProps) => {
-  const { id } = await params;
+  const { id } = await params; // ✅ FIXED
   const { userId } = await auth();
 
   const image = await getImageById(id);

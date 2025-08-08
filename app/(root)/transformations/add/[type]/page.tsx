@@ -6,12 +6,8 @@ import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 interface SearchParamProps {
-  params: {
-    type: TransformationTypeKey;
-  };
+  params: Promise<{ type: TransformationTypeKey }>;
 }
-
-
 
 const AddTransformationTypePage = async ({ params }: SearchParamProps) => {
   const { type } = await params;

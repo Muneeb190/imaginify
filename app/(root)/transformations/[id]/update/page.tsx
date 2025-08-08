@@ -8,13 +8,11 @@ import Header from "@/components/shared/header";
 import TransformationForm from "@/components/shared/transformationForm"
 
 interface SearchParamProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>; // ✅ FIXED
 }
 
 const Page = async ({ params }: SearchParamProps) => {
-  const { id } = await params;
+  const { id } = await params; // ✅ FIXED
   const { userId } = await auth();
 
   if (!userId) redirect("/sign-in");
