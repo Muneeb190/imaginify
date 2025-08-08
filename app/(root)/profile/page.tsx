@@ -6,13 +6,14 @@ import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-declare type SearchParamProps = {
-  searchParams: { [key: string]: string | string[] | undefined };
+type SearchProps = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
-const Profile = async (props: SearchParamProps) => {
-  const searchParams = await props.searchParams || {};
-  const page = Number(searchParams?.page) || 1;
+
+const Profile = async ({ searchParams }: SearchProps) => {
+  const resolvedParams = await searchParams;
+  const page = Number(resolvedParams?.page) || 1;
 
   const { userId } = await auth();
 
