@@ -49,7 +49,7 @@ export const Collections = ({
   return (
     <>
       <div className="collection-heading">
-        <h2 className="h2-bold text-dark-600">Recent Edits</h2>
+        <h2 className="h2-bold text-gray-700">Recent Edits</h2>
         {hasSearch && <Search />}
       </div>
 
@@ -61,7 +61,7 @@ export const Collections = ({
         </ul>
       ) : (
         <div className="collection-empty">
-          <p className="p-20-semibold">Empty List</p>
+          <p>Empty List</p>
         </div>
       )}
 
