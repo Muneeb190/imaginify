@@ -18,7 +18,7 @@ export const InsufficientCreditsModal = () => {
   const router = useRouter();
 
   return (
-    <AlertDialog defaultOpen>
+    <AlertDialog defaultOpen>a
       <AlertDialogContent>
         <AlertDialogHeader>
           <div className="flex-between">
@@ -53,15 +53,15 @@ export const InsufficientCreditsModal = () => {
             more credits.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
+        <AlertDialogFooter className="flex justify-end gap-4">
           <AlertDialogCancel
-            className="button w-full bg-purple-100 text-dark-400"
+            className="button w-1/2 bg-purple-100"
             onClick={() => router.push("/profile")}
           >
             No, Cancel
           </AlertDialogCancel>
           <AlertDialogAction
-            className="button w-full gradient-text  bg-cover"
+            className="button w-1/2 gradient-text"
             onClick={() => router.push("/credits")}
           >
             Yes, Proceed
