@@ -108,41 +108,6 @@
 
 ---
 
-## 📂 Project Architecture
-
-```plaintext
-imaginify/
-├── app/
-│   ├── (auth)/                  # Clerk auth routes (sign-in, sign-up)
-│   ├── (root)/                  # Main application routes
-│   │   ├── credits/             # Credit purchasing & checkout page
-│   │   ├── profile/             # User profile & transformation history
-│   │   ├── transformations/     # Add, edit, view image transformations
-│   │   ├── layout.tsx           # Main app layout with Sidebar & MobileNav
-│   │   └── page.tsx             # Home dashboard & community collection
-│   ├── api/
-│   │   └── webhooks/            # Clerk and Stripe webhook endpoints
-│   ├── globals.css              # Design system tokens and custom utilities
-│   └── layout.tsx               # Root HTML shell & Clerk provider
-├── components/
-│   ├── shared/                  # Reusable domain components (Sidebar, MediaUploader, etc.)
-│   └── ui/                      # Shadcn UI primitives (Button, Dialog, Sheet, etc.)
-├── constants/                   # Navigation links, pricing plans, transformation configs
-├── lib/
-│   ├── actions/                 # Server Actions (image, user, transaction actions)
-│   ├── database/
-│   │   ├── models/              # Mongoose schemas (User, Image, Transaction)
-│   │   └── mongoose.ts          # Cached MongoDB connection handler
-│   └── utils.ts                 # Helper utilities, URL query formatters, error handlers
-├── public/                      # Static assets, icons, and badges
-├── types/                       # Global TypeScript declarations and interfaces
-├── middleware.ts                # Clerk route protection middleware
-├── next.config.ts               # Next.js configuration and remote image domains
-└── package.json                 # Dependencies and project scripts
-```
-
----
-
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -169,40 +134,6 @@ Ensure you have the following installed on your machine:
    ```bash
    npm install
    ```
-
----
-
-### Environment Variables
-
-Create a `.env.local` file in the root directory and configure the following keys:
-
-```env
-# NEXT.JS
-NEXT_PUBLIC_SERVER_URL=http://localhost:3000
-
-# CLERK AUTHENTICATION
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
-CLERK_SECRET_KEY=sk_test_...
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
-NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
-NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
-WEBHOOK_SECRET=whsec_...
-
-# MONGODB
-MONGODB_URL=mongodb+srv://<username>:<password>@cluster.mongodb.net/imaginify?retryWrites=true&w=majority
-
-# CLOUDINARY
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-CLOUDINARY_URL=cloudinary://<api_key>:<api_secret>@<cloud_name>
-
-# STRIPE
-STRIPE_SECRET_KEY=sk_test_...
-STRIPE_WEBHOOK_SECRET=whsec_...
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
-```
 
 ---
 
